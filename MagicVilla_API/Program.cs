@@ -1,3 +1,4 @@
+using MagicVilla_API;
 using MagicVilla_API.Datos;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseMySql(connectionString: "server=192.168.60.99;port=3300;database=MagicVilla;uid=root;password=my_password", new MySqlServerVersion(new Version(8, 0, 27)));
 });
+
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 var app = builder.Build();
 
