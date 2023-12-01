@@ -25,7 +25,6 @@ namespace MagicVilla_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DetalleEspecial")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("FechaActualizacion")
@@ -44,6 +43,29 @@ namespace MagicVilla_API.Migrations
                     b.ToTable("NumeroVillas");
                 });
 
+            modelBuilder.Entity("MagicVilla_API.Modelos.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombres")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Rol")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuarios");
+                });
+
             modelBuilder.Entity("MagicVilla_API.Modelos.Villa", b =>
                 {
                     b.Property<int>("Id")
@@ -51,11 +73,9 @@ namespace MagicVilla_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Amenidad")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Detalle")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("FechaActualizacion")
@@ -65,7 +85,6 @@ namespace MagicVilla_API.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("ImagenUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("MetrosCuadrados")
@@ -91,8 +110,8 @@ namespace MagicVilla_API.Migrations
                             Id = 1,
                             Amenidad = "",
                             Detalle = "Detalles de la villa",
-                            FechaActualizacion = new DateTime(2023, 11, 24, 11, 29, 15, 774, DateTimeKind.Local).AddTicks(3861),
-                            FechaCreacion = new DateTime(2023, 11, 24, 11, 29, 15, 774, DateTimeKind.Local).AddTicks(3840),
+                            FechaActualizacion = new DateTime(2023, 11, 30, 8, 42, 44, 829, DateTimeKind.Local).AddTicks(3315),
+                            FechaCreacion = new DateTime(2023, 11, 30, 8, 42, 44, 829, DateTimeKind.Local).AddTicks(3299),
                             ImagenUrl = "",
                             MetrosCuadrados = 50,
                             Nombre = "Nombre Real",
@@ -104,8 +123,8 @@ namespace MagicVilla_API.Migrations
                             Id = 2,
                             Amenidad = "",
                             Detalle = "Detalles de la villa",
-                            FechaActualizacion = new DateTime(2023, 11, 24, 11, 29, 15, 774, DateTimeKind.Local).AddTicks(3866),
-                            FechaCreacion = new DateTime(2023, 11, 24, 11, 29, 15, 774, DateTimeKind.Local).AddTicks(3865),
+                            FechaActualizacion = new DateTime(2023, 11, 30, 8, 42, 44, 829, DateTimeKind.Local).AddTicks(3319),
+                            FechaCreacion = new DateTime(2023, 11, 30, 8, 42, 44, 829, DateTimeKind.Local).AddTicks(3318),
                             ImagenUrl = "",
                             MetrosCuadrados = 40,
                             Nombre = "Premium Vista a la Piscina",

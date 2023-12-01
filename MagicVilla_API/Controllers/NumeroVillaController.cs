@@ -2,6 +2,7 @@
 using MagicVilla_API.Modelos;
 using MagicVilla_API.Modelos.Dto;
 using MagicVilla_API.Repositorio.IRepositorio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -26,13 +27,14 @@ namespace MagicVilla_API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetNumeroVillas() 
         {
             try
             {
                 _logger.LogInformation("Obtener Numero villas");
-                IEnumerable<NumeroVilla> numeroVillaList = await _numeroVillaRepositorio.ObtenerTodos();
+                IEnumerable<NumeroVilla> numeroVillaList = await _numeroVillaRepositorio.ObtenerTodos(incluirPropiedades: "Villa");
                 _response.Resultado = _mapper.Map<IEnumerable<NumeroVillaDto>>(numeroVillaList);
                 _response.StatusCode = HttpStatusCode.OK;
 
@@ -46,7 +48,8 @@ namespace MagicVilla_API.Controllers
             return _response;
         }
 
-        [HttpGet("id:int", Name = "GetNumeroVilla")]
+        [HttpGet("{id:int}", Name = "GetNumeroVilla")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -60,7 +63,7 @@ namespace MagicVilla_API.Controllers
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
-                var numeroVilla = await _numeroVillaRepositorio.ObtenerRegistro(v => v.VillaNo == id);
+                var numeroVilla = await _numeroVillaRepositorio.ObtenerRegistro(v => v.VillaNo == id, incluirPropiedades: "Villa");
                 if (numeroVilla == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
@@ -79,6 +82,7 @@ namespace MagicVilla_API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -94,13 +98,13 @@ namespace MagicVilla_API.Controllers
                 var existeNombre = await _numeroVillaRepositorio.ObtenerRegistro(v => v.VillaNo == createDto.VillaNo);
                 if (existeNombre != null)
                 {
-                    ModelState.AddModelError("NombreExiste", "El Numero de Villa ya existe");
+                    ModelState.AddModelError("ErrorsMessages", "El Numero de Villa ya existe");
                     return BadRequest(ModelState);
                 }
                 var existeVilla = await _villaRepositorio.ObtenerRegistro(v => v.Id == createDto.VillaId);
                 if (existeVilla == null)
                 {
-                    ModelState.AddModelError("Clave Foranea", "El Id de Villa no existe");
+                    ModelState.AddModelError("ErrorsMessages", "El Id de Villa no existe");
                     return BadRequest(ModelState);
                 }
                 if (createDto == null)
@@ -122,7 +126,8 @@ namespace MagicVilla_API.Controllers
             }
             return _response;
         }
-        [HttpDelete("id:int")]
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -156,6 +161,7 @@ namespace MagicVilla_API.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateNumeroVilla(int id, [FromBody] NumeroVillaUpdateDto updateDto)
@@ -169,7 +175,7 @@ namespace MagicVilla_API.Controllers
             var existeVilla = await _villaRepositorio.ObtenerRegistro(v => v.Id == updateDto.VillaId);
             if (existeVilla == null)
             {
-                ModelState.AddModelError("Clave Foranea", "El Id de Villa no existe");
+                ModelState.AddModelError("ErrorsMessages", "El Id de Villa no existe");
                 return BadRequest(ModelState);
             }
             NumeroVilla modelo = _mapper.Map<NumeroVilla>(updateDto);

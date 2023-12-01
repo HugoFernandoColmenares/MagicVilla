@@ -48,3 +48,11 @@ C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\n
 C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\obj\Debug\net7.0\MagicVilla_API.sourcelink.json
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Admin1\Documents\Recursos\NetCore\MagicVilla\MagicVilla_API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
